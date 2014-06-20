@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>AngularJs Video Directive</title>
+</head>
+<body ng-app="myApp">
+	<div ng-controller="AppCtrl" style="margin: 0px auto">
+		<h1>anguVideo</h1>
+		<p>
+			This is a directive that takes in a vimeo or a youtube url and converts it into an embedded friendly url and the displays it.
+			
+		</p>
+		<p>
+			<strong>Note:</strong> If an embedded friendly url is provided then the directive will simply get the trusted resource url using angular's trustAsResourceUrl() functionality and then display the video
+		</p>
+		<h5> Url formats:</h5>
+		<ul>
+			<li>http://www.youtube.com/watch?v=[xyzxyz]</li>
+			<li>http://youtu.be/[xyzxyz]</li>
+			<li>http://www.youtube.com/embed/[xyzxyz]</li>
+			<li>http://vimeo.com/[xyzxyz]</li>
+		</ul>
+
+		<h3> Attributes</h3>
+		<p>
+			width:  width="[number]%" or width="[number]" - for px
+			<br> <br>
+			height: height="[number]"
+		</p>
+		<br> <br>
+
+		<h3>YouTube Examples</h3>
+		<hr>
+
+		<div>{{youTubeURL}}</div>
+		<div anguvideo ng-model="youTubeURL" width="250" height="250"></div>
+		<br> <br>
+
+		<div>{{youTubeShareURL}}</div>
+		<anguvideo ng-model="youTubeShareURL" width="300" height="400"></anguvideo>
+		<br> <br>
+		<div>{{youTubeEmbededURL}}</div>
+		<anguvideo ng-model="youTubeEmbededURL" width="50%" height="300"></anguvideo>
+		
+		<h3>Vimeo Examples</h3>
+		<hr>
+		<div>{{vimeoURL}}</div>
+		<anguvideo ng-model="vimeoURL" width="50%" height="500"></anguvideo>
+		<br> <br>
+
+	</div>
+	
+	<script src="./bower_components/angular/angular.js"></script>
+	<script src="./js/controller.js"></script>
+	<script src="js/anguvideo.js"></script>
+</body>
+</html>

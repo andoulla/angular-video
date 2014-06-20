@@ -3,8 +3,9 @@ angular-video
 
 A directive that takes in a vimeo or a youtube url and converts it into an embedded friendly url and the displays it.
 
-###Key Features
-* 
+### What it does
+* Converts any url into an embedded friendly url (according to vimeo's and youtube's preference)
+* Gets the trusted resource url using angular's trustAsResourceUrl() functionality
 
 ### Available url formats
 * http://www.youtube.com/watch?v=[xyzxyz]

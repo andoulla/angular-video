@@ -1,7 +1,10 @@
-angular-video
+anguVideo
 =============
 
 A directive that takes in a vimeo or a youtube url and converts it into an embedded friendly url and the displays it.
+
+###Contributing
+anguVideo is a free and open source library, and we appreciate any help you're willing to give.
 
 ### What it does
 * Converts any url into an embedded friendly url (according to vimeo's and youtube's preference)
@@ -41,22 +44,4 @@ The anguvideo project is covered by the [MIT License](http://opensource.org/lice
 The MIT License (MIT)
 
 Copyright (c) 2014 Mariandi Stylianou, and contributors to the anguvideo project.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
 

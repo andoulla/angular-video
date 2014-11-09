@@ -1,15 +1,29 @@
 {
-    "name": "anguvideo",
-    "version": "0.0.0",
-    "main": "js/anguvideo.js",
-    "dependencies": {
-        "angular": "~1.2.16"
-    },
-    "keywords": [
-        "video",
-        "angular",
-        "embedded"
-    ]//,
-    //"_source": "git://github.com/angular/bower-angular.git"
-
+  "name": "anguvideo",
+  "version": "0.0.0",
+  "main": "js/anguvideo.js",
+  "dependencies": {
+    "angular": "~1.2.16"
+  },
+  "keywords": [
+    "video",
+    "angularjs",
+    "embedded",
+    "directive",
+    "youtube",
+    "vimeo"
+  ],
+  "homepage": "https://github.com/andoulla/angular-video",
+  "authors": [
+    "m.a.s"
+  ],
+  "description": "A directive that takes in a vimeo or a youtube url and converts it into an embedded friendly url and the displays it.",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }

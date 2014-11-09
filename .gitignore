@@ -1,0 +1,6 @@
+# Created by .gitignore support plugin (hsz.mobi)
+/bower_components/*
+.idea/misc.xml
+.idea/vcs.xml
+.idea/workspace.xml
+projectFilesBackup/*

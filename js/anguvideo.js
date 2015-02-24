@@ -3,7 +3,7 @@
  */
 /*global angular*/
 angular.module('anguvideo', [])
-    .directive("anguvideo", function ($sce) {
+    .directive("anguvideo", ['$sce', function ($sce) {
         return {
             restrict: 'EA',
             scope: {
@@ -59,4 +59,4 @@ angular.module('anguvideo', [])
                 });
             }
         };
-    });
+    }]);

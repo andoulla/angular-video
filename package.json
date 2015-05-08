@@ -1,6 +1,6 @@
 {
   "name": "angular-video",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A directive that takes in a vimeo or a youtube url and converts it into an embedded friendly url and the displays it.",
   "main": "js/anguvideo.js",
   "scripts": {

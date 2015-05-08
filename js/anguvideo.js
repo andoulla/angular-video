@@ -15,10 +15,12 @@ angular.module('anguvideo', [])
             template: '<div class="anguvideo">' +
                             '<iframe class="videoClass" type="text/html" width="{{width}}" height="{{height}}" ng-src="{{url}}" allowfullscreen frameborder="0"></iframe>' +
                       '</div>',
-            link: function (scope) {
+            link: function (scope, element, attrs) {
                 var embedFriendlyUrl = "",
                     urlSections,
                     index;
+                
+                var youtubeParams = (attrs.hideControls ? '?autoplay=0&showinfo=0&controls=0' : '');
 
                 scope.$watch('source', function (newVal) {
                     if (newVal) {
@@ -42,14 +44,14 @@ angular.module('anguvideo', [])
                             index = newVal.indexOf(".be/");
 
                             embedFriendlyUrl = newVal.slice(index + 4, newVal.length);
-                            embedFriendlyUrl = "http://www.youtube.com/embed/" + embedFriendlyUrl;
+                            embedFriendlyUrl = "http://www.youtube.com/embed/" + embedFriendlyUrl + youtubeParams;
 
                         } else if (newVal.indexOf("youtube.com") >= 0) { // displaying a youtube video
 
                             if (newVal.indexOf("embed") >= 0) {
-                                embedFriendlyUrl = newVal;
+                                embedFriendlyUrl = newVal + youtubeParams;
                             } else {
-                                embedFriendlyUrl = newVal.replace("/watch?v=", "/embed/");
+                                embedFriendlyUrl = newVal.replace("/watch?v=", "/embed/") + youtubeParams;
                             }
                         }
 

@@ -4,7 +4,7 @@
 /*global angular*/
 'use strict';
 
-angular.module('defina-se-backoffice-ui')
+angular.module('anguvideo',[])
     .directive("anguvideo", ['$sce','$rootScope', function ($sce,$rootScope) {
         return {
             restrict: 'EA',

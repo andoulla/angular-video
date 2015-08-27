@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('anguvideo',[])
-    .directive("anguvideo", ['$sce','$rootScope', function ($sce,$rootScope) {
+    .directive("anguvideo", ['$sce', function ($sce) {
         return {
             restrict: 'EA',
             scope: {
@@ -22,7 +22,7 @@ angular.module('anguvideo',[])
               var player;
               function onPlayerStateChange(event) {
                 if (!event.data) {
-                  $rootScope.$broadcast("anguvideo:finishVideo");
+                  scope.$emit("anguvideo:finishVideo");
                 }
               }
               (function onYouTubeIframeAPIReady() {
@@ -69,7 +69,7 @@ angular.module('anguvideo',[])
 
 
                                   function onFinish(id) {
-                                      $rootScope.$broadcast("anguvideo:finishVideo");
+                                      scope.$emit("anguvideo:finishVideo");
                                   }
                             });
 

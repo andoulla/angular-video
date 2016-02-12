@@ -15,7 +15,7 @@ angular.module('anguvideo',[])
             },
             replace: true,
             template: '<div class="anguvideo">' +
-                            '<iframe id="playerYV" class="videoClass" type="text/html" width="{{width}}" height="{{height}}" ng-src="{{url}}" allowfullscreen autoplay frameborder="0"></iframe>' +
+                            '<iframe id="playerYV" class="videoClass" type="text/html" width="{{width}}" height="{{height}}" ng-src="{{url}}" allowfullscreen frameborder="0"></iframe>' +
                       '</div>',
             link: function (scope, element, attrs) {
 
@@ -37,7 +37,7 @@ angular.module('anguvideo',[])
                     urlSections,
                     index;
 
-                var youtubeParams = (attrs.hideControls ? '?autoplay=0&showinfo=0&controls=0&enablejsapi=1&origin='+origin : '?autoplay=1&enablejsapi=1&origin='+origin);
+                var youtubeParams = (attrs.hideControls ? '?autoplay=0&showinfo=0&controls=0&enablejsapi=1&origin='+origin : '?autoplay=0&enablejsapi=1&origin='+origin);
 
                 scope.$watch('source', function (newVal) {
                     if (newVal) {
@@ -56,7 +56,7 @@ angular.module('anguvideo',[])
                                 urlSections = embedFriendlyUrl.split(".com/");
                                 embedFriendlyUrl = embedFriendlyUrl.replace("vimeo", "player.vimeo");
                                 embedFriendlyUrl = embedFriendlyUrl.replace("/" + urlSections[urlSections.length - 1], "/video/" + urlSections[urlSections.length - 1] + "");
-                                embedFriendlyUrl += '?autoplay=1&api=1&player_id=playerYV';
+                                embedFriendlyUrl += '?autoplay=0&api=1&player_id=playerYV';
                             }
 
                             $(function() {

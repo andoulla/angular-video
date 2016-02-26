@@ -14,8 +14,8 @@ angular.module('anguvideo',[])
                 height: '@'
             },
             replace: true,
-            template: '<div class="anguvideo">' +
-                            '<iframe id="playerYV" class="videoClass" type="text/html" width="{{width}}" height="{{height}}" ng-src="{{url}}" allowfullscreen frameborder="0"></iframe>' +
+            template: '<div class="anguvideo embed-responsive embed-responsive-16by10">' +
+                            '<iframe id="playerYV" class="videoClass" type="text/html" ng-src="{{url}}" allowfullscreen frameborder="0"></iframe>' +
                       '</div>',
             link: function (scope, element, attrs) {
 

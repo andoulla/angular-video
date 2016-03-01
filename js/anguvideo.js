@@ -25,6 +25,7 @@ angular.module('anguvideo',[])
               function onPlayerStateChange(event) {
                 if (!event.data) {
                   scope.$emit("anguvideo:finishVideo");
+                  $interval.cancel(scope.timer);
                 }
                 if(event.data === 1) { // Started playing
                       if(!scope.timeSpent.length){

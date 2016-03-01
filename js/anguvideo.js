@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('anguvideo',[])
-    .directive("anguvideo", ['$sce', function ($sce) {
+    .directive("anguvideo", ['$sce', '$interval', function ($sce, $interval) {
         return {
             restrict: 'EA',
             scope: {
@@ -20,9 +20,19 @@ angular.module('anguvideo',[])
             link: function (scope, element, attrs) {
 
               var player;
+              scope.timer, scope.timeSpent = [];
+
               function onPlayerStateChange(event) {
                 if (!event.data) {
                   scope.$emit("anguvideo:finishVideo");
+                }
+                if(event.data === 1) { // Started playing
+                      if(!scope.timeSpent.length){
+                          for(var i=0, l=parseInt(player.getDuration()); i<l; i++) scope.timeSpent.push(false);
+                      }
+                    scope.timer = $interval(record,100);
+                  } else {
+                   $interval.cancel(scope.timer);
                 }
               }
               (function onYouTubeIframeAPIReady() {
@@ -32,6 +42,32 @@ angular.module('anguvideo',[])
                   }
                 });
               }());
+
+              function record(){
+              	scope.timeSpent[ parseInt(player.getCurrentTime()) ] = true;
+              	showPercentage();
+              }
+
+              function showPercentage(){
+                  var percent = 0;
+                  for(var i=0, l=scope.timeSpent.length; i<l; i++){
+                      if(scope.timeSpent[i]) percent++;
+                  }
+                  percent = Math.round(percent / scope.timeSpent.length * 100);
+                  console.log(percent + "%");
+                  if(percent >= 70){
+                    broadcastWatchedMinPercentage();
+                    $interval.cancel(scope.timer);
+                  }
+              }
+
+              function broadcastWatchedMinPercentage(){
+                if(!scope.watchedMinPercentage){
+                  scope.$emit("anguvideo:watchedMinPercentage");
+                  scope.watchedMinPercentage = true;
+                }
+              }
+
                 var origin = location.origin;
                 var embedFriendlyUrl = "",
                     urlSections,
@@ -46,8 +82,8 @@ angular.module('anguvideo',[])
                         * for youtube: src="//www.youtube.com/embed/{{video_id}}"
                         * for vimeo: src="http://player.vimeo.com/video/{{video_id}}
                         */
-
-
+                        scope.timer, scope.timeSpent = [];
+                        scope.watchedMinPercentage = 0;
                         if (newVal.indexOf("vimeo") >= 0) { // Displaying a vimeo video
                             if (newVal.indexOf("player.vimeo") >= 0) {
                                 embedFriendlyUrl = newVal;
@@ -64,13 +100,32 @@ angular.module('anguvideo',[])
                                   var player = $f(iframe);
                                   // When the player is ready, add listeners for pause, finish, and playProgress
                                   player.addEvent('ready', function() {
-                                      player.addEvent('finish', onFinish);
+                                      player.addEvent('pause', function(){
+                                        $interval.cancel(scope.timer);
+                                      });
+                                      player.addEvent('finish', function(){
+                                        scope.$emit("anguvideo:finishVideo");
+                                        $interval.cancel(scope.timer);
+                                      });
+                                      player.addEvent('play', function(){
+                                        var PlayerVimeoDuration, PlayerVimeoCurrentTime;
+                                        player.api('getDuration', function(PlayerVimeoDuration) {
+                                          if(!scope.timeSpent.length){
+                                            for(var i=0, l=parseInt(PlayerVimeoDuration); i<l; i++) scope.timeSpent.push(false);
+                                          }
+                                        });
+                                      });
+                                      player.addEvent('playProgress', function(data, id){
+                                        scope.timeSpent[parseInt(data.seconds)] = true;
+                                        showPercentage();
+                                      });
                                   });
-
-
-                                  function onFinish(id) {
-                                      scope.$emit("anguvideo:finishVideo");
-                                  }
+                                  scope.$on("anguvideo:watchedMinPercentage", function(){
+                                    player.removeEvent('play');
+                                    player.removeEvent('playProgress');
+                                    player = undefined;
+                                    iframe = undefined;
+                                  });
                             });
 
                         } else if (newVal.indexOf("youtu.be") >= 0) {
@@ -81,22 +136,27 @@ angular.module('anguvideo',[])
                             embedFriendlyUrl = "http://www.youtube.com/embed/" + embedFriendlyUrl + youtubeParams;
 
                         } else if (newVal.indexOf("youtube.com") >= 0) { // displaying a youtube video
-
                             if (newVal.indexOf("embed") >= 0) {
                                 embedFriendlyUrl = newVal + youtubeParams;
                             } else {
                                 embedFriendlyUrl = newVal.replace("/watch?v=", "/embed/") + youtubeParams;
                             }
-
                         }
 
                         scope.url = $sce.trustAsResourceUrl(embedFriendlyUrl);
                         //console.log("done",  scope.url, embedFriendlyUrl);
 
-
-
                     }
+
                 });
+
+                scope.$on("$destroy",function(){
+                  $interval.cancel(scope.timer);
+                });
+                element.on("$destroy",function() {
+                  $interval.cancel(scope.timer);
+                  scope.watchedMinPercentage = 0;
+                })
             }
         };
     }]);

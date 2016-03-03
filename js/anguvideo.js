@@ -55,7 +55,7 @@ angular.module('anguvideo',[])
                       if(scope.timeSpent[i]) percent++;
                   }
                   percent = Math.round(percent / scope.timeSpent.length * 100);
-                  console.log(percent + "%");
+                  //console.log(percent + "%");
                   if(percent >= 70){
                     broadcastWatchedMinPercentage();
                     $interval.cancel(scope.timer);

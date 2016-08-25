@@ -49,6 +49,18 @@ angular.module('anguvideo',[])
               	showPercentage();
               }
 
+              function apiYoutubePauseVideo(){
+                scope.$on("pause",function(){
+                  player.pauseVideo();
+                 });
+              }
+
+              function apiYoutubePlayVideo(){
+                scope.$on("play",function(){
+                  player.playVideo();
+                 });
+              }
+
               function showPercentage(){
                   var percent = 0;
                   for(var i=0, l=scope.timeSpent.length; i<l; i++){
@@ -121,6 +133,14 @@ angular.module('anguvideo',[])
                                         showPercentage();
                                       });
                                   });
+
+                                  scope.$on("pause",function(){
+                                    player.api('pause');
+                                  });
+                                  scope.$on("play",function(){
+                                     player.api('play');
+                                  });
+
                                   scope.$on("anguvideo:watchedMinPercentage", function(){
                                     player.removeEvent('play');
                                     player.removeEvent('playProgress');
@@ -135,8 +155,12 @@ angular.module('anguvideo',[])
 
                             embedFriendlyUrl = newVal.slice(index + 4, newVal.length);
                             embedFriendlyUrl = "http://www.youtube.com/embed/" + embedFriendlyUrl + youtubeParams;
+                            apiYoutubePauseVideo();
+                            apiYoutubePlayVideo();
 
                         } else if (newVal.indexOf("youtube.com") >= 0) { // displaying a youtube video
+                          apiYoutubePauseVideo();
+                          apiYoutubePlayVideo();
                             if (newVal.indexOf("embed") >= 0) {
                                 embedFriendlyUrl = newVal + youtubeParams;
                             } else {

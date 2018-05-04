@@ -37,7 +37,11 @@ var app = angular.module('app', ["anguvideo"]);
 | ngModel | An angular model containing the URL | Yes | $scope.URL |
 | width | The desired width of the video | No | 50% or 500px |
 | height | The desired height of the video | No | 400 |
-| hideControls | Set to hide YouTube title and player controls | No | true | 
+| hide-controls | Set to hide YouTube player controls | No | true |
+| auto-play | Set to autoplay video on web | No | true | 
+| show-info | Set false to hide YouTube title | No | false | 
+| rel | Set false to not show related videos | No | false | 
+| modest-branding | Set to hide YouTube brand on controls bar | No | true | 
 
 ### License
 The anguvideo project is covered by the [MIT License](http://opensource.org/licenses/MIT "MIT License").

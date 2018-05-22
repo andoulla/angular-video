@@ -20,7 +20,24 @@ angular.module('anguvideo', [])
                     urlSections,
                     index;
 
-                var youtubeParams = (attrs.hideControls ? '?autoplay=0&showinfo=0&controls=0' : '');
+                var youtubeParams = '';
+                if(attrs.hideControls==='true'){ youtubeParams += '?controls=0'; }
+                if(attrs.autoPlay==='true'){
+                  if(youtubeParams==''){youtubeParams += '?';}
+                  else{youtubeParams += '&';}
+                  youtubeParams += 'autoplay=0'; }
+                if(attrs.showInfo==='false'){
+                  if(youtubeParams==''){youtubeParams += '?';}
+                  else{youtubeParams += '&';}
+                  youtubeParams += 'showinfo=0'; }
+                if(attrs.rel==='false'){
+                  if(youtubeParams==''){youtubeParams += '?';}
+                  else{youtubeParams += '&';}
+                  youtubeParams += 'rel=0'; }
+                if(attrs.modestBranding==='true'){
+                  if(youtubeParams==''){youtubeParams += '?';}
+                  else{youtubeParams += '&';}
+                  youtubeParams += 'modestbranding=1'; }
 
                 scope.$watch('source', function (newVal) {
                     if (newVal) {
